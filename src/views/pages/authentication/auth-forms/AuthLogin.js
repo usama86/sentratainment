@@ -35,10 +35,13 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 
+// import { useNavigate } from 'react-router-dom';
+
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
+  // const navigate = useNavigate();
   const scriptedRef = useScriptRef();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
   const customization = useSelector((state) => state.customization);
@@ -55,6 +58,12 @@ const FirebaseLogin = ({ ...others }) => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleSignUp = () => {
+    localStorage.setItem('user', 'Exist');
+    // navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -215,7 +224,16 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="secondary">
+                <Button
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleSignUp}
+                >
                   Sign in
                 </Button>
               </AnimateButton>
