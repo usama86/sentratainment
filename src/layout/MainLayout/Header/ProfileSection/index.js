@@ -57,7 +57,12 @@ const ProfileSection = () => {
   const anchorRef = useRef(null);
   const handleLogout = async () => {
     localStorage.removeItem('user');
-    window.location.reload();
+    if (location.pathname === '/') {
+      window.location.reload();
+    } else {
+      navigate('/');
+      window.location.reload();
+    }
   };
 
   const handleClose = (event) => {
