@@ -6,7 +6,6 @@ import { useState } from 'react';
 import BoxComponent from 'ui-component/BoxComponent';
 import ButtonComponent from 'ui-component/ButtonComponent';
 import FormDialog from 'ui-component/Dialog';
-import TextFieldComponent from 'ui-component/TextField';
 import MainCard from 'ui-component/cards/MainCard';
 import Table from 'ui-component/table';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,6 +13,7 @@ import { fetchVideoData } from 'utils/api';
 import { useEffect } from 'react';
 import TypographyComponent from 'ui-component/TypographyComponent';
 import { formatDate } from 'utils/utilFunction';
+import AddMovie from './AddMovie';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -87,11 +87,11 @@ const Movies = () => {
     }
   ];
 
-  const onChangeMovie = (value, type) => {
-    const copyMovies = { ...movies };
-    copyMovies[type] = value;
-    setMovies(copyMovies);
-  };
+  // const onChangeMovie = (value, type) => {
+  //   const copyMovies = { ...movies };
+  //   copyMovies[type] = value;
+  //   setMovies(copyMovies);
+  // };
 
   useEffect(() => {
     fetchDataAsync();
@@ -134,21 +134,7 @@ const Movies = () => {
       )}
 
       <FormDialog open={openAddMovie} title="Add Movies" handleClose={() => setOpenAddMovie(false)} subTitle="Add new movie here">
-        <BoxComponent sx={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <TextFieldComponent
-            value={`${movies.firstName} `}
-            Label="First Name"
-            onChange={(e) => onChangeMovie(e.target.value, 'firstName')}
-          />
-          <TextFieldComponent value={`${movies.lastName}`} Label="Last Name" onChange={(e) => onChangeMovie(e.target.value, 'lastName')} />
-          <TextFieldComponent value={`${movies.email}`} Label="Email" onChange={(e) => onChangeMovie(e.target.value, 'email')} />
-          <TextFieldComponent
-            value={`${movies.password}`}
-            Label="Password"
-            type="password"
-            onChange={(e) => onChangeMovie(e.target.value, 'password')}
-          />
-        </BoxComponent>
+        <AddMovie />
       </FormDialog>
     </MainCard>
   );
