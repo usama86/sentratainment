@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import TypographyComponent from 'ui-component/TypographyComponent';
 import { formatDate } from 'utils/utilFunction';
 import AddMovie from './AddMovie';
+import { styles } from 'views/styles';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -49,36 +50,7 @@ const Movies = () => {
       accessorKey: 'dateUploaded',
       header: 'Date Uploaded',
       size: 150,
-      Cell: ({ renderedCellValue }) => (
-        <TypographyComponent
-          sx={{
-            letterSpacing: '0em',
-            fontWeight: '400',
-            lineHeight: '1.5em',
-            color: '#364152',
-            fontFamily: "'Roboto',sans-serif",
-            fontSize: '0.875rem',
-            verticalAlign: 'inherit',
-            textAlign: 'left',
-            cursor: 'inherit',
-            overflow: 'hidden',
-            padding: '1rem',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'normal',
-            zIndex: '0',
-            backgroundColor: 'inherit',
-            backgroundImage: 'inherit',
-            display: 'table-cell',
-            opacity: '1',
-            WebkitTransition: 'padding 150ms ease-in-out',
-            transition: 'padding 150ms ease-in-out',
-            minWidth: 'max(calc(var(--col-title-size) * 1px), 40px)',
-            width: 'calc(var(--col-title-size) * 1px)'
-          }}
-        >
-          {formatDate(renderedCellValue)}
-        </TypographyComponent>
-      )
+      Cell: ({ renderedCellValue }) => <TypographyComponent sx={styles.textStyle}>{formatDate(renderedCellValue)}</TypographyComponent>
     },
     {
       accessorKey: 'category',

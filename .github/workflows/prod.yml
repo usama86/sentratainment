@@ -40,6 +40,6 @@ jobs:
           # ARGS: "-rltgoDzvO --delete"
           SOURCE: 'create-react-app/build/'
           REMOTE_HOST: 192.34.62.123
-          REMOTE_USER: berry
+          REMOTE_USER: Sentertainment
           TARGET: public_html
           EXCLUDE: '/create-react-app/dist/, /create-react-app/node_modules/'

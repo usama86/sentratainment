@@ -1,8 +1,8 @@
 // assets
-import { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser } from '@tabler/icons';
+import { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser, IconShoppingCart } from '@tabler/icons';
 
 // constant
-const icons = { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser };
+const icons = { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser, IconShoppingCart };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -49,6 +49,14 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/user',
       icon: icons.IconUser,
+      breadcrumbs: false
+    },
+    {
+      id: 'order',
+      title: 'Orders',
+      type: 'item',
+      url: '/dashboard/order',
+      icon: icons.IconShoppingCart,
       breadcrumbs: false
     }
   ]

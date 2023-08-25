@@ -12,7 +12,7 @@
 //     .catch(err => console.error(err));
 
 import axios from 'axios';
-import { AUDIOBASEURL, VIDEOBASEURL } from './Constant';
+import { AUDIOBASEURL, VIDEOBASEURL, SENTERTAINMENT_DB } from './Constant';
 
 const options = (type) => ({
   method: 'GET',
@@ -68,3 +68,141 @@ export const UploadVideo = async (ID, file) => {
 //   .then((response) => response.json())
 //   .then((response) => console.log(response))
 //   .catch((err) => console.error(err));
+
+// const config = (method = 'get', url) => {
+//   let config = {
+//     method: method,
+//     maxBodyLength: Infinity,
+//     url: `${SENTERTAINMENT_DB}${url}`,
+//     headers: {}
+//   };
+//   return config;
+// };
+
+export const getAllUser = async () => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/user/allUser/`);
+    return response?.data?.user;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllFood = async () => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/food/getfood/?type=simple`);
+    return response?.data?.foodObj;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getUserOrder = async (id) => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/order/getUserOrder?_id=${id}`);
+    return response?.data?.order;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllOrder = async () => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/order/getAllOrder`);
+    return response?.data?.order;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getAllTypes = async () => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/food/gettype`);
+    return response?.data?.type;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const addUserApi = async (data) => {
+  try {
+    const response = await axios.post(`${SENTERTAINMENT_DB}/api/user/`, data);
+    console.log(response.data.message);
+    return response.data.message;
+  } catch (e) {
+    console.log(e.response.data.message);
+    return e.response.data.message;
+  }
+};
+
+export const editUserApi = async (data, id) => {
+  try {
+    const response = await axios.put(`${SENTERTAINMENT_DB}/api/user/editUser?userId=${id}`, data);
+    console.log(response.data);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data);
+    return e.response.data.resultCode;
+  }
+};
+
+export const deleteUserApi = async (id) => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/user/deleteUser?userId=${id}`);
+    console.log(response.data);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data);
+    return e.response.data.resultCode;
+  }
+};
+
+export const addFoodType = async (data) => {
+  try {
+    const response = await axios.post(`${SENTERTAINMENT_DB}/api/food/addtype`, data);
+    console.log(response.data.resultCode);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data.resultCode);
+    return e.response.data.resultCode;
+  }
+};
+
+export const addFood = async (data) => {
+  try {
+    const response = await axios.post(`${SENTERTAINMENT_DB}/api/food/addfood`, data);
+    console.log(response.data.resultMessage.en);
+    return response.data.resultMessage.en;
+  } catch (e) {
+    console.log(e.response.data.resultMessage.en);
+    return e.response.data.resultMessage.en;
+  }
+};
+
+export const editFood = async (id, data) => {
+  try {
+    const response = await axios.put(`${SENTERTAINMENT_DB}/api/food/editfood?Id=${id}`, data);
+    console.log(response.data.resultCode);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data.resultCode);
+    return e.response.data.resultCode;
+  }
+};
+
+export const deleteFoodApi = async (id) => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/food/deletefood?Id=${id}`);
+    console.log(response.data);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data);
+    return e.response.data.resultCode;
+  }
+};
+
+// export const fetchAudioData = async ({ page = 1, items = 10 }) => {
+//   const response = await axios.get(`${AUDIOBASEURL}storagezone?page=${page}&perPage=${items}`, options('audio'));
+//   return response.data;
+// };
+// {{Base_URL}}

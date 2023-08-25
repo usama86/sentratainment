@@ -20,7 +20,7 @@ const Movies = Loadable(lazy(() => import('views/movies')));
 const Audio = Loadable(lazy(() => import('views/audio')));
 const Food = Loadable(lazy(() => import('views/food')));
 const User = Loadable(lazy(() => import('views/user')));
-
+const OrderPage = Loadable(lazy(() => import('views/orders')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -53,6 +53,10 @@ const MainRoutes = {
         {
           path: 'user',
           element: <User />
+        },
+        {
+          path: 'order',
+          element: <OrderPage />
         }
       ]
     }
