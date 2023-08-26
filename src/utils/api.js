@@ -36,23 +36,23 @@ export const fetchAudioData = async ({ page = 1, items = 10 }) => {
 };
 
 export const UploadVideo = async (ID, file) => {
-  const url = `${VIDEOBASEURL}library/${process.env.REACT_APP_VIDEO_LIBRARY}/videos/30bf821a-aaae-422f-a3e2-cfb73126f22d?enabledResolutions=true`;
-  const formData = new FormData();
-  formData.append('files', file); // Append the file to the form data
-  const options = {
-    method: 'PUT',
-    data: formData,
+  const uploadOptions = {
+    url: `${VIDEOBASEURL}library/${process.env.REACT_APP_VIDEO_LIBRARY}/videos/45b3bbb0-ef17-4be3-8520-88fa1ba248bd`,
+    data: file,
     headers: {
-      accept: 'application/json',
-      AccessKey: process.env.REACT_APP_VIDEO_ACCESS_KEY
+      AccessKey: process.env.REACT_APP_VIDEO_ACCESS_KEY,
+      'Content-Type': 'application/octet-stream'
     }
   };
 
-  try {
-    const response = await axios(url, options);
-    console.log(response.data);
-  } catch (err) {
-    console.error(err);
+  const uploadResponse = await axios.put(uploadOptions.url, uploadOptions.data, {
+    headers: uploadOptions.headers
+  });
+
+  if (uploadResponse.status === 200) {
+    console.log('Video uploaded successfully');
+  } else {
+    console.error('Failed to upload video content');
   }
 };
 
@@ -201,8 +201,55 @@ export const deleteFoodApi = async (id) => {
   }
 };
 
-// export const fetchAudioData = async ({ page = 1, items = 10 }) => {
-//   const response = await axios.get(`${AUDIOBASEURL}storagezone?page=${page}&perPage=${items}`, options('audio'));
-//   return response.data;
-// };
-// {{Base_URL}}
+export const getAllMedia = async () => {
+  try {
+    const response = await axios.get(`${SENTERTAINMENT_DB}/api/media/getmedia`);
+    return response?.data?.media;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const addMedia = async (data) => {
+  try {
+    const response = await axios.post(`${SENTERTAINMENT_DB}/api/media/createmedia`, data);
+    console.log(response.data.resultMessage.en);
+    return response.data.resultMessage.en;
+  } catch (e) {
+    console.log(e.response.data.resultMessage.en);
+    return e.response.data.resultMessage.en;
+  }
+};
+
+export const editMedia = async (id, data) => {
+  try {
+    const response = await axios.put(`${SENTERTAINMENT_DB}/api/media/editmedia?id=${id}`, data);
+    console.log(response.data.resultCode);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data.resultCode);
+    return e.response.data.resultCode;
+  }
+};
+
+export const deleteMedia = async (id) => {
+  try {
+    const response = await axios.put(`${SENTERTAINMENT_DB}/api/media/deletemedia?id=${id}`);
+    console.log(response.data);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data);
+    return e.response.data.resultCode;
+  }
+};
+
+export const loginApi = async (data) => {
+  try {
+    const response = await axios.post(`${SENTERTAINMENT_DB}/api/user/login`, data);
+    console.log(response.data.resultCode);
+    return response.data.resultCode;
+  } catch (e) {
+    console.log(e.response.data.resultCode);
+    return e.response.data.resultCode;
+  }
+};

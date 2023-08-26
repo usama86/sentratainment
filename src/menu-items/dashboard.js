@@ -19,20 +19,20 @@ const dashboard = {
       icon: icons.IconDashboard,
       breadcrumbs: false
     },
+    // {
+    //   id: 'movies',
+    //   title: 'Movies',
+    //   type: 'item',
+    //   url: '/dashboard/movies',
+    //   icon: icons.IconMovie,
+    //   breadcrumbs: false
+    // },
     {
-      id: 'movies',
-      title: 'Movies',
+      id: 'media',
+      title: 'Media',
       type: 'item',
-      url: '/dashboard/movies',
+      url: '/dashboard/media',
       icon: icons.IconMovie,
-      breadcrumbs: false
-    },
-    {
-      id: 'audio',
-      title: 'Audio',
-      type: 'item',
-      url: '/dashboard/audio',
-      icon: icons.IconHeadset,
       breadcrumbs: false
     },
     {

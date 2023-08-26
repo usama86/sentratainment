@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemSecondaryAction,
+  // ListItemSecondaryAction,
   ListItemText,
   Typography
 } from '@mui/material';
@@ -17,6 +17,7 @@ import {
 
 import React from 'react';
 import { formatedTime } from 'utils/utilFunction';
+// import { formatedTime } from 'utils/utilFunction';
 
 // styles
 const ListItemWrapper = styled('div')(({ theme }) => ({
@@ -81,17 +82,13 @@ const NotificationList = ({ notifications }) => {
                 <Avatar>{data?.title.charAt(0)}</Avatar>
               </ListItemAvatar>
               <ListItemText primary={data?.title} />
-              <ListItemSecondaryAction>
-                <Grid container justifyContent="flex-end">
-                  <Grid item xs={12}>
-                    <Typography variant="caption" display="block" gutterBottom>
-                      {formatedTime(data?.timestamp)}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItemSecondaryAction>
             </ListItem>
             <Grid container direction="column" className="list-container">
+              <Grid item xs={12} sx={{}}>
+                <Typography variant="caption" display="block" gutterBottom>
+                  {formatedTime(data?.timestamp)}
+                </Typography>
+              </Grid>
               <Grid item xs={12} sx={{ pb: 2 }}>
                 <Typography variant="subtitle2">
                   {data?.user} with Seat no {data?.seatNo} Order
