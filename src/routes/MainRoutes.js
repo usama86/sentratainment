@@ -16,11 +16,11 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 
 // sample page routing
 // const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-const Movies = Loadable(lazy(() => import('views/movies')));
-const Audio = Loadable(lazy(() => import('views/audio')));
+// const Movies = Loadable(lazy(() => import('views/movies')));
+const Media = Loadable(lazy(() => import('views/audio')));
 const Food = Loadable(lazy(() => import('views/food')));
 const User = Loadable(lazy(() => import('views/user')));
-
+const OrderPage = Loadable(lazy(() => import('views/orders')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -38,13 +38,13 @@ const MainRoutes = {
           path: '',
           element: <DashboardDefault />
         },
+        // {
+        //   path: 'movies',
+        //   element: <Movies />
+        // },
         {
-          path: 'movies',
-          element: <Movies />
-        },
-        {
-          path: 'audio',
-          element: <Audio />
+          path: 'media',
+          element: <Media />
         },
         {
           path: 'food',
@@ -53,6 +53,10 @@ const MainRoutes = {
         {
           path: 'user',
           element: <User />
+        },
+        {
+          path: 'order',
+          element: <OrderPage />
         }
       ]
     }

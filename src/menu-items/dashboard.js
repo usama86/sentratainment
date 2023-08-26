@@ -1,8 +1,8 @@
 // assets
-import { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser } from '@tabler/icons';
+import { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser, IconShoppingCart } from '@tabler/icons';
 
 // constant
-const icons = { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser };
+const icons = { IconDashboard, IconMovie, IconHeadset, IconSalad, IconUser, IconShoppingCart };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -19,20 +19,20 @@ const dashboard = {
       icon: icons.IconDashboard,
       breadcrumbs: false
     },
+    // {
+    //   id: 'movies',
+    //   title: 'Movies',
+    //   type: 'item',
+    //   url: '/dashboard/movies',
+    //   icon: icons.IconMovie,
+    //   breadcrumbs: false
+    // },
     {
-      id: 'movies',
-      title: 'Movies',
+      id: 'media',
+      title: 'Media',
       type: 'item',
-      url: '/dashboard/movies',
+      url: '/dashboard/media',
       icon: icons.IconMovie,
-      breadcrumbs: false
-    },
-    {
-      id: 'audio',
-      title: 'Audio',
-      type: 'item',
-      url: '/dashboard/audio',
-      icon: icons.IconHeadset,
       breadcrumbs: false
     },
     {
@@ -49,6 +49,14 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/user',
       icon: icons.IconUser,
+      breadcrumbs: false
+    },
+    {
+      id: 'order',
+      title: 'Orders',
+      type: 'item',
+      url: '/dashboard/order',
+      icon: icons.IconShoppingCart,
       breadcrumbs: false
     }
   ]

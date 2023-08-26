@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -16,9 +16,9 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Snackbar,
   Stack,
-  Typography,
-  useMediaQuery
+  Typography
 } from '@mui/material';
 
 // third party
@@ -32,8 +32,8 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import Google from 'assets/images/icons/social-google.svg';
+import { loginApi } from 'utils/api';
+// import { loginApi } from 'utils/api';
 
 // import { useNavigate } from 'react-router-dom';
 
@@ -43,13 +43,10 @@ const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
   // const navigate = useNavigate();
   const scriptedRef = useScriptRef();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-  const customization = useSelector((state) => state.customization);
-  const [checked, setChecked] = useState(true);
 
-  const googleHandler = async () => {
-    console.error('Login');
-  };
+  const [checked, setChecked] = useState(true);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [message, setMessage] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -60,36 +57,23 @@ const FirebaseLogin = ({ ...others }) => {
     event.preventDefault();
   };
 
-  const handleSignUp = () => {
-    localStorage.setItem('user', 'Exist');
-    // navigate('/');
-    window.location.reload();
+  const handleSignUp = async (values) => {
+    console.log(values);
+    const loginres = await loginApi({ email: values.email, password: values.password });
+    if (loginres === '00047') {
+      localStorage.setItem('user', 'Exist');
+      setMessage('Successfully Logged in');
+      // navigate('/');
+      window.location.reload();
+    } else {
+      setMessage('Incorrect email or Password');
+    }
+    setOpenSnackBar(true);
   };
 
   return (
     <>
       <Grid container direction="column" justifyContent="center" spacing={2}>
-        <Grid item xs={12}>
-          <AnimateButton>
-            <Button
-              disableElevation
-              fullWidth
-              onClick={googleHandler}
-              size="large"
-              variant="outlined"
-              sx={{
-                color: 'grey.700',
-                backgroundColor: theme.palette.grey[50],
-                borderColor: theme.palette.grey[100]
-              }}
-            >
-              <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-                <img src={Google} alt="google" width={16} height={16} style={{ marginRight: matchDownSM ? 8 : 16 }} />
-              </Box>
-              Sign in with Google
-            </Button>
-          </AnimateButton>
-        </Grid>
         <Grid item xs={12}>
           <Box
             sx={{
@@ -97,26 +81,6 @@ const FirebaseLogin = ({ ...others }) => {
               display: 'flex'
             }}
           >
-            <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
-
-            <Button
-              variant="outlined"
-              sx={{
-                cursor: 'unset',
-                m: 2,
-                py: 0.5,
-                px: 7,
-                borderColor: `${theme.palette.grey[100]} !important`,
-                color: `${theme.palette.grey[900]}!important`,
-                fontWeight: 500,
-                borderRadius: `${customization.borderRadius}px`
-              }}
-              disableRipple
-              disabled
-            >
-              OR
-            </Button>
-
             <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
           </Box>
         </Grid>
@@ -129,8 +93,8 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -213,7 +177,7 @@ const FirebaseLogin = ({ ...others }) => {
                 label="Remember me"
               />
               <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
-                Forgot Password?
+                {``}
               </Typography>
             </Stack>
             {errors.submit && (
@@ -232,7 +196,7 @@ const FirebaseLogin = ({ ...others }) => {
                   type="submit"
                   variant="contained"
                   color="secondary"
-                  onClick={handleSignUp}
+                  onClick={() => handleSignUp(values)}
                 >
                   Sign in
                 </Button>
@@ -241,6 +205,16 @@ const FirebaseLogin = ({ ...others }) => {
           </form>
         )}
       </Formik>
+
+      <Snackbar open={openSnackBar} autoHideDuration={2000} onClose={() => setOpenSnackBar(false)}>
+        <Alert
+          onClose={() => setOpenSnackBar(false)}
+          severity={message === 'Successfully Logged in' ? 'success' : 'error'}
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
