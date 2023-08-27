@@ -27,6 +27,7 @@ import { addMedia, deleteMedia, editMedia, getAllMedia } from 'utils/api';
 import TypographyComponent from 'ui-component/TypographyComponent';
 import { useEffect } from 'react';
 import { movieGenre, musicGenre } from 'utils/JsonCostant';
+import CloudinaryUploadWidget from 'ui-component/CloudinaryUpload';
 // import BoxComponent from 'ui-component/BoxComponent';
 
 const getGenre = (values) => {
@@ -423,6 +424,13 @@ export const CreateNewMediaModal = ({ open, onClose, typeData, onSubmit }) => {
     }
   };
 
+  const onUploadSuccess = (result, type) => {
+    console.log(result);
+    const value = { ...values };
+    value[type] = result?.info?.secure_url;
+    setValues(value);
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle textAlign="center">Add New Media</DialogTitle>
@@ -442,7 +450,9 @@ export const CreateNewMediaModal = ({ open, onClose, typeData, onSubmit }) => {
                 key !== 'isActivated' &&
                 key !== 'musicInfo.singerName' &&
                 key !== 'genre' &&
-                key !== 'category' && (
+                key !== 'category' &&
+                key !== 'ImgLink' &&
+                key !== 'mediaLink' && (
                   <TextField key={key} label={key} name={key} type={'text'} onChange={handleChange} value={values[key]} />
                 )
             )}
@@ -480,6 +490,8 @@ export const CreateNewMediaModal = ({ open, onClose, typeData, onSubmit }) => {
             </FormControl>
           </Stack>
         </form>
+        <CloudinaryUploadWidget onUploadSuccess={(e) => onUploadSuccess(e, 'ImgLink')} text="Upload Thubmnail" />
+        <CloudinaryUploadWidget onUploadSuccess={(e) => onUploadSuccess(e, 'mediaLink')} text="Upload Video/Audio" />
       </DialogContent>
       <DialogActions sx={{ p: '1.25rem' }}>
         <Button onClick={onClose}>Cancel</Button>

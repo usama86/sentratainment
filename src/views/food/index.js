@@ -27,6 +27,7 @@ import { deleteFoodApi, editFood, getAllFood, getAllTypes, addFoodType, addFood 
 import TypographyComponent from 'ui-component/TypographyComponent';
 import { useEffect } from 'react';
 import BoxComponent from 'ui-component/BoxComponent';
+import CloudinaryUploadWidget from 'ui-component/CloudinaryUpload';
 
 const FoodPage = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
@@ -207,6 +208,15 @@ const FoodPage = () => {
         // enableEditing: false
       },
       {
+        accessorKey: 'foodImg',
+        header: 'Food Image',
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...getCommonEditTextFieldProps(cell)
+        })
+        // enableEditing: false
+      },
+      {
         accessorKey: 'createdAt',
         header: 'Created At',
         size: 80,
@@ -303,7 +313,8 @@ export const CreateNewAccountModal = ({ open, onClose, typeData, getType, onSubm
       currency: 'GBP'
     },
     quantity: null,
-    type: ''
+    type: '',
+    foodImg: ''
   });
 
   const [foodType, setFoodType] = useState('');
@@ -369,6 +380,13 @@ export const CreateNewAccountModal = ({ open, onClose, typeData, getType, onSubm
     }
   };
 
+  const onUploadSuccess = (result) => {
+    console.log(result);
+    const value = { ...values };
+    value.foodImg = result?.info?.secure_url;
+    setValues(value);
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle textAlign="center">Add New Food</DialogTitle>
@@ -384,7 +402,8 @@ export const CreateNewAccountModal = ({ open, onClose, typeData, getType, onSubm
             {Object.keys(values).map(
               (key) =>
                 key !== 'price' &&
-                key !== 'type' && ( // Exclude 'platform', 'type', and 'phone' fields
+                key !== 'type' &&
+                key !== 'foodImg' && ( // Exclude 'platform', 'type', and 'phone' fields
                   <TextField
                     key={key}
                     label={key}
@@ -412,6 +431,7 @@ export const CreateNewAccountModal = ({ open, onClose, typeData, getType, onSubm
                   {loader ? <CircularProgress size={20} /> : '+'}
                 </Button>
               </BoxComponent>
+              <CloudinaryUploadWidget onUploadSuccess={onUploadSuccess} text="Upload Image" id="upload-widget" />
             </FormControl>
           </Stack>
         </form>
