@@ -5,7 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
+// const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
 // utilities routing
 // const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -29,21 +29,21 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <Media />
     },
     {
       path: 'dashboard',
       children: [
-        {
-          path: '',
-          element: <DashboardDefault />
-        },
+        // {
+        //   path: '',
+        //   element: <DashboardDefault />
+        // },
         // {
         //   path: 'movies',
         //   element: <Movies />
         // },
         {
-          path: 'media',
+          path: '',
           element: <Media />
         },
         {

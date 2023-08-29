@@ -11,14 +11,14 @@ const dashboard = {
   title: 'Dashboard',
   type: 'group',
   children: [
-    {
-      id: 'default',
-      title: 'Dashboard',
-      type: 'item',
-      url: '/dashboard/',
-      icon: icons.IconDashboard,
-      breadcrumbs: false
-    },
+    // {
+    //   id: 'default',
+    //   title: 'Dashboard',
+    //   type: 'item',
+    //   url: '/dashboard/',
+    //   icon: icons.IconDashboard,
+    //   breadcrumbs: false
+    // },
     // {
     //   id: 'movies',
     //   title: 'Movies',
@@ -28,10 +28,10 @@ const dashboard = {
     //   breadcrumbs: false
     // },
     {
-      id: 'media',
+      id: 'default',
       title: 'Media',
       type: 'item',
-      url: '/dashboard/media',
+      url: '/dashboard/',
       icon: icons.IconMovie,
       breadcrumbs: false
     },

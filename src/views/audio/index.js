@@ -456,8 +456,20 @@ export const CreateNewMediaModal = ({ open, onClose, typeData, onSubmit }) => {
                   <TextField key={key} label={key} name={key} type={'text'} onChange={handleChange} value={values[key]} />
                 )
             )}
-            <TextField label="Singer Name" name="musicInfo.singerName" onChange={handleChange} value={values.musicInfo.singerName} />
-            <TextField label="Album Name" name="musicInfo.albumName" onChange={handleChange} value={values.musicInfo.albumName} />
+            <TextField
+              label="Singer Name"
+              name="musicInfo.singerName"
+              onChange={handleChange}
+              value={values.musicInfo.singerName}
+              helperText="for Audio"
+            />
+            <TextField
+              label="Album Name"
+              name="musicInfo.albumName"
+              onChange={handleChange}
+              value={values.musicInfo.albumName}
+              helperText="for Audio"
+            />
             <FormControl variant="outlined">
               <InputLabel htmlFor="type">Type</InputLabel>
               <Select label="Type" name="type" onChange={handleChange} value={values.type}>
@@ -491,7 +503,7 @@ export const CreateNewMediaModal = ({ open, onClose, typeData, onSubmit }) => {
           </Stack>
         </form>
         <CloudinaryUploadWidget onUploadSuccess={(e) => onUploadSuccess(e, 'ImgLink')} text="Upload Thubmnail" />
-        <CloudinaryUploadWidget onUploadSuccess={(e) => onUploadSuccess(e, 'mediaLink')} text="Upload Video/Audio" />
+        <CloudinaryUploadWidget onUploadSuccess={(e) => onUploadSuccess(e, 'mediaLink')} text="Upload Movie/Audio" />
       </DialogContent>
       <DialogActions sx={{ p: '1.25rem' }}>
         <Button onClick={onClose}>Cancel</Button>
